@@ -1,3 +1,8 @@
+#include <sys/socket.h>       /*  socket definitions        */
+#include <sys/types.h>        /*  socket types              */
+#include <arpa/inet.h>        /*  inet (3) funtions         */
+#include <unistd.h>           /*  misc. UNIX functions      */
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -25,13 +30,15 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	stuct sockaddr_in addr;
+	struct sockaddr_in addr;
 
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(port);
-	addr.sin_addr = htonl(INADDR_ANY);
 
-	bind(sock, &addr, sizeof(addr));
+
+	addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+	bind(sock, (struct sockaddr *) &addr, sizeof(addr));
 
 	return 0;
 }
