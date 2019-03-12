@@ -17,5 +17,19 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
+	int sock;
+
+	sock = socket(PF_INET, SOCK_DGRAM, 0);
+	if (sock < 0) {
+		printf("Error creating socket"); 
+		exit(EXIT_FAILURE);
+	}
+
+	stuct sockaddr_in addr;
+
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(port);
+	addr.sin_addr = htonl(INADDR_ANY);
+
 	return 0;
 }
