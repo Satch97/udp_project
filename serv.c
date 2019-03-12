@@ -31,5 +31,7 @@ int main(int argc, char **argv) {
 	addr.sin_port = htons(port);
 	addr.sin_addr = htonl(INADDR_ANY);
 
+	bind(sock, &addr, sizeof(addr));
+
 	return 0;
 }
