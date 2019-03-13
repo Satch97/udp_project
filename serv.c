@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 	if (bind(sock, (struct sockaddr *) &addr, sizeof(addr))) {
 		printf("Error : Binding Failure");
 		exit(EXIT_FAILURE);
-	};
+	}
 
 	return 0;
 }
