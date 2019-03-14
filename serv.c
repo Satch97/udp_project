@@ -8,6 +8,9 @@
 #include <stdlib.h>
 
 #include <errno.h>
+
+#define MAX_BUF (65507)
+
 int main(int argc, char **argv) {
 	if(argc != 2) {
 		printf("Usage Error : server.exe <server port>");
@@ -41,5 +44,14 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
+	char buffer[MAX_BUF];
+	struct sockaddr_in cl_addr;
+	unsigned int cl_addr_len;
+	int len;
+	while(1) {
+	    memset(&buffer, 0, sizeof(buffer));
+		len = recvfrom(sock, buffer, sizeof(buffer), 0, 
+			(struct sockaddr *)&cl_addr, &cl_addr_len);
+	}
 	return 0;
 }
