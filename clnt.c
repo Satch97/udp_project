@@ -16,7 +16,7 @@ int GetInstr() {
         x = getchar();
         getchar(); // get rid of extra newline
         if (x == 's') return 1;
-        if (x == 'q') exit(0);
+        if (x == 'q') return 0;
     }
 }
 
@@ -51,4 +51,9 @@ int main(int argc, char **argv) {
 	if (sock < 0) {
 		printf("Error : Socket could not be created\n");
 	}
+
+	if(!GetInstr()) {
+		return 0;
+	}
+
 }
