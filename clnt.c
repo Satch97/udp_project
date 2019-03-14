@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define MAX_BUF     (65535)
+
 // Heavily inspired from project 1 getinstr function
 int GetInstr() {
     char x;
@@ -52,8 +54,17 @@ int main(int argc, char **argv) {
 		printf("Error : Socket could not be created\n");
 	}
 
-	if(!GetInstr()) {
-		return 0;
+	char buffer[MAX_BUF];
+
+	while(1) {
+
+		if(!GetInstr()) {
+			return 0;
+		}
+
+		memset(&buffer, 0, sizeof(buffer));
+		printf("Enter string : ");
+        scanf("%s", buffer);
 	}
 
 }
