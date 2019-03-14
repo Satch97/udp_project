@@ -27,4 +27,10 @@ int main(int argc, char **argv) {
         printf("Error : Invalid Address\n");
         exit(EXIT_FAILURE);
     }
+
+	int sock;
+	sock = socket (PF_INET, SOCK_DGRAM, 0);
+	if (sock < 0) {
+		printf("Error : Socket could not be created\n");
+	}
 }
