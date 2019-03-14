@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Heavily inspired from project 1 getinstr function
+int GetInstr() {
+    char x;
+    while(1) {
+        printf("Enter \'s\' to send a string \nEnter 'f' to send file\nEnter q to exit\nEnter : ");
+        x = getchar();
+        getchar(); // get rid of extra newline
+        if (x == 's') return 1;
+        if (x == 'q') exit(0);
+    }
+}
+
 int main(int argc, char **argv) {
 	if(argc != 3) {
 		printf("Usage Error : client.exe <server IP> <server port>");
