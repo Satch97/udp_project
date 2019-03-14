@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 	struct sockaddr_in sockaddr;
 	memset(&sockaddr, 0, sizeof(sockaddr));
 	sockaddr.sin_family = AF_INET;
-	sockaddr.sin_port = htnos(port);
+	sockaddr.sin_port = htons(port);
 
 	if (inet_aton (addr, &sockaddr.sin_addr) <= 0) {
         printf("Error : Invalid Address\n");
