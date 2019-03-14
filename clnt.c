@@ -8,6 +8,8 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
+	char *addr = argv[1];
+
 	long int rawPort = strtol(argv[2], NULL, 10);
 	uint16_t port = (uint16_t) rawPort;
 
