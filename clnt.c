@@ -17,4 +17,14 @@ int main(int argc, char **argv) {
 		printf("Invalid port"); // does not fit in range
 		exit(EXIT_FAILURE);
 	}
+
+	struct sockaddr_in sockaddr;
+	memset(&sockaddr, 0, sizeof(sockaddr));
+	sockaddr.sin_family = AF_INET;
+	sockaddr.sin_port = htnos(port);
+
+	if (inet_aton (addr, &sockaddr.sin_addr) <= 0) {
+        printf("Error : Invalid Address\n");
+        exit(EXIT_FAILURE);
+    }
 }
