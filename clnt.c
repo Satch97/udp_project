@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
 	uint16_t port = (uint16_t) rawPort;
 
 	if(port != rawPort) {
-		printf("Invalid port"); // does not fit in range
+		printf("Error : Invalid port"); // does not fit in range
 		exit(EXIT_FAILURE);
 	}
 

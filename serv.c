@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 	uint16_t port = (uint16_t) rawPort;
 
 	if(port != rawPort) {
-		printf("Invalid port"); // does not fit in range
+		printf("Error : Invalid port"); // does not fit in range
 		exit(EXIT_FAILURE);
 	}
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 
 	sock = socket(PF_INET, SOCK_DGRAM, 0);
 	if (sock < 0) {
-		printf("Error creating socket"); 
+		printf("Error : Socket could not be created"); 
 		exit(EXIT_FAILURE);
 	}
 
