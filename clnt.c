@@ -31,6 +31,15 @@ void InitDefaultTransfer(int sock, struct sockaddr_in sockaddr){
 	}
 }
 
+void InitDGRead(int sock) {
+	fd_set fds;
+	FD_ZERO(&fds);
+	FD_SET(sock, &fds);
+	char buffer[MAX_BUF];
+	int ret, servaddr_len;
+	struct sockaddr_in servaddr;
+}
+
 int main(int argc, char **argv) {
 	if(argc != 3) {
 		printf("Usage Error : client.exe <server IP> <server port>");
