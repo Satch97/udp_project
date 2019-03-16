@@ -38,6 +38,18 @@ void InitDGRead(int sock) {
 	char buffer[MAX_BUF];
 	int ret, servaddr_len;
 	struct sockaddr_in servaddr;
+	while(1) {
+		ret = select(sizeof(fds)*8, &fds, NULL, NULL, NULL);
+		if (ret == -1) {
+			printf("Error : Failure with select");
+			exit(1);
+		} else if (ret > 0) {
+			memset(&buffer, 0, sizeof(buffer));
+			recvfrom(sock, buffer, sizeof(buffer), 0,
+			(struct sockaddr *)&servaddr, &servaddr_len);
+			printf("\n%s\n", buffer);
+		}
+	}
 }
 
 int main(int argc, char **argv) {
