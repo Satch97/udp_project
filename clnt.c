@@ -15,7 +15,7 @@
 int GetInstr() {
     char x;
     while(1) {
-        printf("Enter \'s\' to send a string \nEnter 'f' to send file\nEnter q to exit\nEnter : ");
+        printf("Enter \'s\' to send a string \nEnter q to exit\nEnter : ");
         x = getchar();
         if (x == 's') return 1;
         if (x == 'q') return 0;
