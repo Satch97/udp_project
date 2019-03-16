@@ -22,6 +22,15 @@ int GetInstr() {
     }
 }
 
+void InitDefaultTransfer(int sock, struct sockaddr_in sockaddr){
+	char nl = '\n';
+	while(1) {
+		sendto(sock, &nl, 1, 0,
+	           (struct sockaddr*)&sockaddr, sizeof(sockaddr));
+		sleep(5);
+	}
+}
+
 int main(int argc, char **argv) {
 	if(argc != 3) {
 		printf("Usage Error : client.exe <server IP> <server port>");
