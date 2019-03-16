@@ -66,6 +66,11 @@ int main(int argc, char **argv) {
 	char buffer[MAX_BUF];
 	int len;
 
+	if (fork() == 0) {
+		InitDefaultTransfer(sock, sockaddr);
+	}
+	
+
 	while(1) {
 
 		if(!GetInstr()) {
