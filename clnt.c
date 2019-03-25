@@ -99,13 +99,6 @@ int main(int argc, char **argv) {
 	        if (FD_ISSET(sock, &fds)){}// read socket
         }	
 
-		memset(&buffer, 0, sizeof(buffer));
-		printf("Enter string : ");
-        scanf("%s", buffer);
-
-        len = sendto(sock, buffer, strlen(buffer), 0,
-	           (struct sockaddr*)&sockaddr, sizeof(sockaddr));
-
 	}
 
 }
