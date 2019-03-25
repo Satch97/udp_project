@@ -10,6 +10,7 @@
 #include <string.h>
 
 #define MAX_BUF     (65535)
+#define STDIN (0)
 
 void InitDefaultTransfer(int sock, struct sockaddr_in sockaddr){
 	char nl = '\n';
