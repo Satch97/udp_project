@@ -89,6 +89,16 @@ int main(int argc, char **argv) {
 
 	while(1) {
 
+		printf("\nEnter \'s\' to send a string \nEnter q to exit\nEnter Command : \n");
+		ret = select(maxfd + 1, &fds, NULL, NULL, NULL);
+
+		if (ret <= 0) {
+			// err
+		} else {
+			if (FD_ISSET(STDIN, &fds)){} // read input }
+	        if (FD_ISSET(sock, &fds)){}// read socket
+        }	
+
 		memset(&buffer, 0, sizeof(buffer));
 		printf("Enter string : ");
         scanf("%s", buffer);
