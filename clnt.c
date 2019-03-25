@@ -102,7 +102,17 @@ int main(int argc, char **argv) {
 		if (ret <= 0) {
 			CaptureError(errno, "select");
 		} else {
-			if (FD_ISSET(STDIN, &fds)){} // read input }
+			if (FD_ISSET(STDIN, &fds)){
+				memset(&buffer, 0, sizeof(buffer));
+
+                for(len = 0; len < MAX_BUF; len++) {
+                	c = getchar();
+                	buffer[len] = c;
+                	
+                	if (c == '\n') break;
+            	}
+
+			} // read input }
 	        if (FD_ISSET(sock, &fds)){}// read socket
         }	
 
