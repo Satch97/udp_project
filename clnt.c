@@ -122,7 +122,7 @@ int main(int argc, char **argv) {
 	                	if (c == '\n'){
 	                		break;
 	                	}
-	                	
+
             		}
 
             		sendto(sock, buffer, strlen(buffer), 0,
@@ -134,9 +134,18 @@ int main(int argc, char **argv) {
 
 			} 
 
-	        if (FD_ISSET(sock, &fds)){}// read socket
+	        if (FD_ISSET(sock, &fds)){
+	        	memset(&buffer, 0, sizeof(buffer));
+				printf("Read from server : ");
+				len = recvfrom(sock, buffer, sizeof(buffer), 0,
+				(struct sockaddr *)&servaddr, &servaddr_len);
+
+				for(int i = 0; i < len; i++) { 
+					printf("%c", buffer[i]);
+				}
+	        }
+
         }	
 
 	}
-
 }
