@@ -11,17 +11,6 @@
 
 #define MAX_BUF     (65535)
 
-// Heavily inspired from project 1 getinstr function
-int GetInstr() {
-    char x;
-    while(1) {
-        printf("Enter \'s\' to send a string \nEnter q to exit\nEnter : ");
-        x = getchar();
-        if (x == 's') return 1;
-        if (x == 'q') return 0;
-    }
-}
-
 void InitDefaultTransfer(int sock, struct sockaddr_in sockaddr){
 	char nl = '\n';
 	while(1) {
@@ -98,10 +87,6 @@ int main(int argc, char **argv) {
 	int maxfd = sock > STDIN ? sock : STDIN;
 
 	while(1) {
-
-		if(!GetInstr()) {
-			return 0;
-		}
 
 		memset(&buffer, 0, sizeof(buffer));
 		printf("Enter string : ");
