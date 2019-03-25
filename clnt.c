@@ -116,6 +116,18 @@ int main(int argc, char **argv) {
 					 printf("\nEnter String : ");
 					 memset(&buffer, 0, sizeof(buffer));
 
+					for(len = 0; len < MAX_BUF; len++) {
+                		c = getchar();
+                		buffer[len] = c;
+	                	if (c == '\n'){
+	                		break;
+	                	}
+	                	
+            		}
+
+            		sendto(sock, buffer, strlen(buffer), 0,
+		            (struct sockaddr*)&sockaddr, sizeof(sockaddr));
+
 				} else {
 					printf("Invalid Input\n");
 				}
