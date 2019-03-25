@@ -108,11 +108,20 @@ int main(int argc, char **argv) {
                 for(len = 0; len < MAX_BUF; len++) {
                 	c = getchar();
                 	buffer[len] = c;
-                	
+
                 	if (c == '\n') break;
             	}
 
-			} // read input }
+            	if (strcmp(buffer, "s\n") == 0) {
+					 printf("\nEnter String : ");
+					 memset(&buffer, 0, sizeof(buffer));
+
+				} else {
+					printf("Invalid Input\n");
+				}
+
+			} 
+
 	        if (FD_ISSET(sock, &fds)){}// read socket
         }	
 
