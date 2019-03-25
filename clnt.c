@@ -84,13 +84,18 @@ int main(int argc, char **argv) {
 		printf("Error : Socket could not be created\n");
 	}
 
-	char buffer[MAX_BUF];
-	int len;
-
 	if (fork() == 0) {
 		InitDefaultTransfer(sock, sockaddr);
 	}
-	
+
+	fd_set fds;
+	FD_ZERO(&fds);
+	FD_SET(STDIN, &fds);
+	char buffer[MAX_BUF], c;
+	int ret = 0, len = 0, err, bindflag = 1;
+	unsigned int servaddr_len;
+	struct sockaddr_in servaddr;
+	int maxfd = sock > STDIN ? sock : STDIN;
 
 	while(1) {
 
