@@ -21,6 +21,13 @@ void InitDefaultTransfer(int sock, struct sockaddr_in sockaddr){
 	}
 }
 
+void CaptureError(int err, char* failedcall) {
+	printf("\nFailed : %s", failedcall);
+	printf("Errno is %d\n", errno);
+	printf("%s\n", strerror (errno));
+	exit(EXIT_FAILURE);
+}
+
 void InitDGRead(int sock) {
 	fd_set fds;
 	FD_ZERO(&fds);
@@ -93,7 +100,7 @@ int main(int argc, char **argv) {
 		ret = select(maxfd + 1, &fds, NULL, NULL, NULL);
 
 		if (ret <= 0) {
-			// err
+			CaptureError(errno, "select");
 		} else {
 			if (FD_ISSET(STDIN, &fds)){} // read input }
 	        if (FD_ISSET(sock, &fds)){}// read socket
