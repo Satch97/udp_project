@@ -38,7 +38,7 @@ void InitDGRead(int sock) {
 	while(1) {
 		ret = select(sizeof(fds)*8, &fds, NULL, NULL, NULL);
 		if (ret == -1) {
-			printf("Error : Failure with select");
+			printf("Error : Failure with select\n");
 			exit(1);
 		} else if (ret > 0) {
 			memset(&buffer, 0, sizeof(buffer));
@@ -51,7 +51,7 @@ void InitDGRead(int sock) {
 
 int main(int argc, char **argv) {
 	if(argc != 3) {
-		printf("Usage Error : client.exe <server IP> <server port>");
+		printf("Usage Error : client.exe <server IP> <server port>\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 	uint16_t port = (uint16_t) rawPort;
 
 	if(port != rawPort) {
-		printf("Error : Invalid port"); // does not fit in range
+		printf("Error : Invalid port\n"); // does not fit in range
 		exit(EXIT_FAILURE);
 	}
 

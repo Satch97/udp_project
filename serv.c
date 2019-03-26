@@ -60,7 +60,7 @@ int AddSocket(struct sockaddr_in *sock) {
 
 int main(int argc, char **argv) {
 	if(argc != 2) {
-		printf("Usage Error : server.exe <server port>");
+		printf("Usage Error : server.exe <server port>\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 
 	sock = socket(PF_INET, SOCK_DGRAM, 0);
 	if (sock < 0) {
-		printf("Error : Socket could not be created"); 
+		printf("Error : Socket could not be created\n"); 
 		exit(EXIT_FAILURE);
 	}
 
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if (bind(sock, (struct sockaddr *) &addr, sizeof(addr))) {
-		printf("Error : Binding Failure");
+		printf("Error : Binding Failure\n");
 		exit(EXIT_FAILURE);
 	}
 
