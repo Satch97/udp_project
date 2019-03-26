@@ -97,7 +97,7 @@ int main(int argc, char **argv) {
 	unsigned int cl_addr_len = sizeof(cl_addr);
 	int len, len2;
 	struct socket *sockptr;
-	
+
 	while(1) {
 	    memset(&buffer, 0, sizeof(buffer));
 		len = recvfrom(sock, buffer, sizeof(buffer), 0, 
@@ -109,7 +109,8 @@ int main(int argc, char **argv) {
 
 		AddSocket(&cl_addr);
 		for (sockptr = head.tqh_first; sockptr != NULL; sockptr = sockptr->sockets.tqe_next) {
-			// send to ecvery client
+			len2 = sendto(sock, buffer, len, 0,
+	           	(struct sockaddr *)sockptr->sockaddrptr, sizeof(struct sockaddr));
 		}
 
 	}
