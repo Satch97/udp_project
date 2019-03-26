@@ -9,11 +9,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
 #include <errno.h>
 
 #define MAX_BUF (65507)
+
+#define CLNT_TTL (15)
 
 TAILQ_HEAD(listhead, socket) head;
 struct tailhead *headp;
@@ -97,6 +97,7 @@ int main(int argc, char **argv) {
 	unsigned int cl_addr_len = sizeof(cl_addr);
 	int len, len2;
 	struct socket *sockptr;
+	time_t curr_time;
 
 	while(1) {
 	    memset(&buffer, 0, sizeof(buffer));
@@ -107,8 +108,15 @@ int main(int argc, char **argv) {
 			continue;
 		}
 
+		curr_time = time(NULL);
 		AddSocket(&cl_addr);
+
 		for (sockptr = head.tqh_first; sockptr != NULL; sockptr = sockptr->sockets.tqe_next) {
+			if(curr_time - sockptr->last_acc > CLNT_TTL) {
+				TAILQ_REMOVE(&head, sockptr, sockets);
+				continue;
+			}
+
 			len2 = sendto(sock, buffer, len, 0,
 	           	(struct sockaddr *)sockptr->sockaddrptr, sizeof(struct sockaddr));
 		}
