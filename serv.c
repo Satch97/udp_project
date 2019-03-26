@@ -112,14 +112,11 @@ int main(int argc, char **argv) {
 			continue;
 		}
 
-		// sleep(1); // delate sending for a second
 		for (sockptr = head.tqh_first; sockptr != NULL; sockptr = sockptr->sockets.tqe_next) {
-			// printf ("in list : %s, %u\n", inet_ntoa (sockptr->sockaddrptr->sin_addr), ntohs (sockptr->sockaddrptr->sin_port));
 			if(curr_time - sockptr->last_acc > CLNT_TTL) {
 				TAILQ_REMOVE(&head, sockptr, sockets);
 				continue;
 			}
-			// printf("Sent to a client\n");
 			len2 = sendto(sock, buffer, len, 0,
 	           	(struct sockaddr *)sockptr->sockaddrptr, sizeof(struct sockaddr));
 		}
