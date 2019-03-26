@@ -94,7 +94,7 @@ int main(int argc, char **argv) {
 
 	char buffer[MAX_BUF];
 	struct sockaddr_in cl_addr;
-	unsigned int cl_addr_len;
+	unsigned int cl_addr_len = sizeof(cl_addr);
 	int len;
 	while(1) {
 	    memset(&buffer, 0, sizeof(buffer));
