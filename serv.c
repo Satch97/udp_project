@@ -26,6 +26,8 @@ struct socket{
 
 int AddSocket(struct sockaddr_in *sock) {
 	struct socket *socketentry;
+	time_t now = time(NULL);
+
 	socketentry = malloc(sizeof(struct socket));
 	if(!socketentry) {
 		printf("Error : Malloc error\n");
@@ -38,6 +40,8 @@ int AddSocket(struct sockaddr_in *sock) {
 		return -1;
 	}
 	
+	memcpy(socketentry->sockaddrptr, sock, sizeof(struct sockaddr_in));
+	socketentry->last_acc = now;
   	TAILQ_INSERT_TAIL(&head, socketentry, sockets);
   	return 0;
 }
