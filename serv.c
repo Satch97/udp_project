@@ -35,9 +35,10 @@ int AddSocket(struct sockaddr_in *sock) {
 		if (sockptr->sockaddrptr->sin_port == sock->sin_port && sockptr->sockaddrptr->sin_addr.s_addr == sock->sin_addr.s_addr) {
 			printf("Duplicate found, Age : %ld : Updating Time\n", now - sockptr->last_acc);
 			sockptr->last_acc = now;
+
+			return 0;	
 		}
-		
-		return 0;		
+
 	}
 
 	socketentry = malloc(sizeof(struct socket));
@@ -103,25 +104,22 @@ int main(int argc, char **argv) {
 	while(1) {
 		// printf("\n");
 	    memset(&buffer, 0, sizeof(buffer));
+	    memset(&cl_addr, 0, sizeof(cl_addr));
 		len = recvfrom(sock, buffer, sizeof(buffer), 0, 
 			(struct sockaddr *)&cl_addr, &cl_addr_len);
-
+		curr_time = time(NULL);
 		if (len == 1 && buffer[0] == '\n') {
+			AddSocket(&cl_addr);
 			continue;
 		}
 
-		curr_time = time(NULL);
-		AddSocket(&cl_addr);
-		// printf("Adding %u to list\n", ntohs(cl_addr.sin_port));
 		// sleep(1); // delate sending for a second
 		for (sockptr = head.tqh_first; sockptr != NULL; sockptr = sockptr->sockets.tqe_next) {
 			// printf ("in list : %s, %u\n", inet_ntoa (sockptr->sockaddrptr->sin_addr), ntohs (sockptr->sockaddrptr->sin_port));
 			if(curr_time - sockptr->last_acc > CLNT_TTL) {
 				TAILQ_REMOVE(&head, sockptr, sockets);
-			//	printf("Client Expired, Removed\n");
 				continue;
 			}
-
 			// printf("Sent to a client\n");
 			len2 = sendto(sock, buffer, len, 0,
 	           	(struct sockaddr *)sockptr->sockaddrptr, sizeof(struct sockaddr));
