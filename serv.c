@@ -27,7 +27,17 @@ struct socket{
 int AddSocket(struct sockaddr_in *sock) {
 	struct socket *socketentry;
 	socketentry = malloc(sizeof(struct socket));
+	if(!socketentry) {
+		printf("Error : Malloc error\n");
+		return -1;
+	}
+
 	socketentry->sockaddrptr = malloc(sizeof(struct sockaddr_in));
+	if(!socketentry) {
+		printf("Error : Malloc error\n");
+		return -1;
+	}
+	
   	TAILQ_INSERT_TAIL(&head, socketentry, sockets);
   	return 0;
 }
