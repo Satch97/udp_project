@@ -88,6 +88,7 @@ int main(int argc, char **argv) {
 	fd_set fds;
 	FD_ZERO(&fds);
 	FD_SET(STDIN, &fds);
+	FD_SET(sock, &fds);
 	char buffer[MAX_BUF], c;
 	int ret = 0, len = 0, err, bindflag = 1;
 	unsigned int servaddr_len;
@@ -97,6 +98,8 @@ int main(int argc, char **argv) {
 	while(1) {
 
 		printf("\nEnter \'s\' to send a string \nEnter q to exit\nEnter Command : \n");
+		FD_SET(STDIN, &fds);
+		FD_SET(sock, &fds);
 		ret = select(maxfd + 1, &fds, NULL, NULL, NULL);
 
 		if (ret <= 0) {
