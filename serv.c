@@ -1,5 +1,6 @@
 #include <sys/socket.h>       /*  socket definitions        */
 #include <sys/types.h>        /*  socket types              */
+#include <sys/queue.h>		  /*  lists					    */
 #include <arpa/inet.h>        /*  inet (3) funtions         */
 #include <unistd.h>           /*  misc. UNIX functions      */
 
@@ -10,6 +11,15 @@
 #include <errno.h>
 
 #define MAX_BUF (65507)
+
+TAILQ_HEAD(listhead, socket) head;
+struct tailhead *headp;
+
+struct socket{
+	struct sockaddr_in *sockaddrptr;
+	time_t last_acc;
+	TAILQ_ENTRY(socket) sockets;
+};
 
 int main(int argc, char **argv) {
 	if(argc != 2) {
@@ -43,6 +53,8 @@ int main(int argc, char **argv) {
 		printf("Error : Binding Failure");
 		exit(EXIT_FAILURE);
 	}
+
+	TAILQ_INIT(&head);
 
 	char buffer[MAX_BUF];
 	struct sockaddr_in cl_addr;
