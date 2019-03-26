@@ -33,7 +33,6 @@ int AddSocket(struct sockaddr_in *sock) {
 	for (sockptr = head.tqh_first; sockptr != NULL; sockptr = sockptr->sockets.tqe_next) {
 		
 		if (sockptr->sockaddrptr->sin_port == sock->sin_port && sockptr->sockaddrptr->sin_addr.s_addr == sock->sin_addr.s_addr) {
-			printf("Duplicate found, Age : %ld : Updating Time\n", now - sockptr->last_acc);
 			sockptr->last_acc = now;
 
 			return 0;	

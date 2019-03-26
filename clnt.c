@@ -139,7 +139,7 @@ int main(int argc, char **argv) {
 
 	        if (FD_ISSET(sock, &fds)){
 	        	memset(&buffer, 0, sizeof(buffer));
-				printf("Read from server : ");
+				printf("\nRead from server : ");
 				len = recvfrom(sock, buffer, sizeof(buffer), 0,
 				(struct sockaddr *)&servaddr, &servaddr_len);
 
