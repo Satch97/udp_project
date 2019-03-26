@@ -95,7 +95,9 @@ int main(int argc, char **argv) {
 	char buffer[MAX_BUF];
 	struct sockaddr_in cl_addr;
 	unsigned int cl_addr_len = sizeof(cl_addr);
-	int len;
+	int len, len2;
+	struct socket *sockptr;
+	
 	while(1) {
 	    memset(&buffer, 0, sizeof(buffer));
 		len = recvfrom(sock, buffer, sizeof(buffer), 0, 
@@ -103,6 +105,11 @@ int main(int argc, char **argv) {
 
 		if (len == 1 && buffer[0] == '\n') {
 			continue;
+		}
+
+		AddSocket(&cl_addr);
+		for (sockptr = head.tqh_first; sockptr != NULL; sockptr = sockptr->sockets.tqe_next) {
+			// send to ecvery client
 		}
 
 	}
