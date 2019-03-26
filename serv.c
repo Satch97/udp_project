@@ -100,7 +100,11 @@ int main(int argc, char **argv) {
 	    memset(&buffer, 0, sizeof(buffer));
 		len = recvfrom(sock, buffer, sizeof(buffer), 0, 
 			(struct sockaddr *)&cl_addr, &cl_addr_len);
-		printf("buffer : %s\n", buffer);
+
+		if (len == 1 && buffer[0] == '\n') {
+			continue;
+		}
+
 	}
 	return 0;
 }
