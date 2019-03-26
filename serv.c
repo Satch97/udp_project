@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <time.h>
+
+
 
 #include <errno.h>
 
@@ -20,6 +23,14 @@ struct socket{
 	time_t last_acc;
 	TAILQ_ENTRY(socket) sockets;
 };
+
+int AddSocket(struct sockaddr_in *sock) {
+	struct socket *socketentry;
+	socketentry = malloc(sizeof(struct socket));
+	socketentry->sockaddrptr = malloc(sizeof(struct sockaddr_in));
+  	TAILQ_INSERT_TAIL(&head, socketentry, sockets);
+  	return 0;
+}
 
 int main(int argc, char **argv) {
 	if(argc != 2) {
